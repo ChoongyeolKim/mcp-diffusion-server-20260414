@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "azureFluxMcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["server/server.js"],
+      "envFile": "${workspaceFolder}/.env"
+    }
+  }
+}
