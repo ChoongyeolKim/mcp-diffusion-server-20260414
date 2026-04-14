@@ -2,7 +2,7 @@
   "name": "mcp-diffusion-server-20260414",
   "version": "1.0.0",
   "description": "MCP for image diffusion server",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js"
   },
@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "bugs": {
     "url": "https://github.com/ChoongyeolKim/mcp-diffusion-server-20260414/issues"
