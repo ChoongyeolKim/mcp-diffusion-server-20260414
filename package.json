@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ChoongyeolKim/mcp-diffusion-server-20260414#readme",
   "dependencies": {
+    "@azure/storage-blob": "^12.31.0",
     "@cfworker/json-schema": "^4.1.1",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "axios": "^1.15.0",
