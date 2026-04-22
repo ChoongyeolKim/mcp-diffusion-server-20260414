@@ -299,7 +299,14 @@ console.error(`[server] Transport mode: ${transportType}`);
 
 if (transportType === "streamable") {
   // ── Streamable HTTP transport ──────────────────────────────────────────────
-  const port = parseInt(process.env.PORT ?? "3000", 10);
+  const port = parseInt(process.env.MCP_PORT ?? "3000", 10);
+  const mcpApiKey = process.env.MCP_API_KEY?.trim();
+
+  if (mcpApiKey) {
+    console.error("[server] API key authentication: enabled");
+  } else {
+    console.error("[server] API key authentication: disabled (MCP_API_KEY not set)");
+  }
 
   // Session map: sessionId → StreamableHTTPServerTransport
   const sessions = new Map();
@@ -310,6 +317,21 @@ if (transportType === "streamable") {
       res.writeHead(404, { "Content-Type": "text/plain" });
       res.end("Not Found");
       return;
+    }
+
+    // ── API Key check ────────────────────────────────────────────────────────
+    if (mcpApiKey) {
+      const authHeader = req.headers["authorization"] ?? "";
+      const providedKey = authHeader.startsWith("Bearer ")
+        ? authHeader.slice(7).trim()
+        : "";
+
+      if (providedKey !== mcpApiKey) {
+        console.error("[server] Unauthorized request — invalid or missing API key");
+        res.writeHead(401, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Unauthorized" }));
+        return;
+      }
     }
 
     try {

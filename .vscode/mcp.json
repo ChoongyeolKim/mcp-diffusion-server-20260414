@@ -5,6 +5,13 @@
       "command": "node",
       "args": ["server/server.js"],
       "envFile": "${workspaceFolder}/.env"
+    },
+    "azureFluxMcpHttp": {
+      "type": "http",
+      "url": "http://localhost:3000/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MCP_API_KEY}"
+      }
     }
   }
 }
